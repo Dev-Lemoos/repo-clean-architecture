@@ -41,5 +41,12 @@ namespace CleanArchMvc.Domain.Tests
             Action action = () => new Category(1, null);
             action.Should().Throw<CleanArchMvc.Domain.Validation.DomainExceptionValidation>();
         }
+
+        [Fact(DisplayName = "Create Category With Null Name (Null Reference)")]
+        public void CreateCategory_WithNullNameValue_NoNullReferenceException()
+        {
+            Action action = () => new Category(1, null);
+            action.Should().NotThrow<NullReferenceException>();
+        }
     }
 }

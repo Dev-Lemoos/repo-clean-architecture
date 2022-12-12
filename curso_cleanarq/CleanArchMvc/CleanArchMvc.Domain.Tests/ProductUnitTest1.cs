@@ -42,6 +42,13 @@ namespace CleanArchMvc.Domain.Tests
             action.Should().Throw<CleanArchMvc.Domain.Validation.DomainExceptionValidation>().WithMessage("Invalid name. Name is required");
         }
 
+        [Fact(DisplayName = "Create Product With Null Name (Null Reference)")]
+        public void CreateProduct_WithNullName_NoNullReferenceException()
+        {
+            Action action = () => new Product(1, null, "Product description", 9.9m, 99, "product image");
+            action.Should().NotThrow<NullReferenceException>();
+        }
+
         [Fact(DisplayName = "Create Product With Missing Description")]
         public void CreateProduct_WithMissingDescriptionValue_DomainExceptionRequiredDescription()
         {
@@ -54,6 +61,13 @@ namespace CleanArchMvc.Domain.Tests
         {
             Action action = () => new Product(1, "product name", null, 9.9m, 99, "product image");
             action.Should().Throw<CleanArchMvc.Domain.Validation.DomainExceptionValidation>();
+        }
+
+        [Fact(DisplayName = "Create Product With Null Description (Null Reference)")]
+        public void CreateProduct_WithNullDescription_NoNullReferenceException()
+        {
+            Action action = () => new Product(1, "Product Name", null, 9.9m, 99, "product image");
+            action.Should().NotThrow<NullReferenceException>();
         }
 
         [Theory (DisplayName = "Create Product With Invalid Stock Value")]
@@ -76,6 +90,13 @@ namespace CleanArchMvc.Domain.Tests
         {
             Action action = () => new Product(1, "Product Name", "Product Description", 9.9m, 99, null);
             action.Should().NotThrow<CleanArchMvc.Domain.Validation.DomainExceptionValidation>();
+        }
+
+        [Fact(DisplayName = "Create Product With Null Image Name (Null Reference)")]
+        public void CreateProduct_WithNullImageName_NoNullReferenceException()
+        {
+            Action action = () => new Product(1, "Product Name", "Product Description", 9.9m, 99, null);
+            action.Should().NotThrow<NullReferenceException>();
         }
 
         [Fact(DisplayName = "Create Product With Empty Image Name")]
